@@ -6,8 +6,8 @@ defmodule OPA.Plug.Authz do
   def init([package: _package, rule: _rule] = opts), do: opts
   def init(_), do: {:error, "must configure package and rule"}
 
-  def call(%Plug.Conn{} = conn, package: package, rule: rule) do
-    with opa_req <- conn_to_opa_req(conn),
+  def call(%Plug.Conn{} = conn, [package: package, rule: rule] = opts) do
+    with opa_req <- conn_to_opa_req(conn, opts),
          {:ok, opa_resp} <- OPA.Client.query(package, rule, opa_req) do
       handle_opa_resp(conn, opa_resp)
     else
@@ -51,7 +51,7 @@ defmodule OPA.Plug.Authz do
     |> halt()
   end
 
-  defp conn_to_opa_req(conn) do
+  defp conn_to_opa_req(conn, _opts) do
     path =
       conn.request_path
       |> String.trim()
@@ -62,6 +62,8 @@ defmodule OPA.Plug.Authz do
     %{
       method: conn.method,
       path: path,
+      query_params: conn.query_params,
+      body: conn.body_params,
       user: current_user
     }
   end

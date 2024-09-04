@@ -22,7 +22,7 @@ defmodule OPA.Client do
     end
   end
 
-  def construct_rule_path(package, rule) do
+  defp construct_rule_path(package, rule) do
     "#{String.replace(package, ".", "/")}/#{rule}"
   end
 end
