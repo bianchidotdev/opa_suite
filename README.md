@@ -5,7 +5,7 @@ OPA (Open Policy Agent) is an Elixir library that provides tools for integrating
 
 - **Plug Integration**: Easily integrate OPA with your Phoenix applications using the provided Plug.
 - **Simple Client**: A straightforward client for making requests to an OPA server.
-- **Server Initializer**: Helper functions to set up and manage an OPA server instance.
+- **Server Initializer**: Helper functions to set up and manage an OPA server instance. # TODO: replace port with MuonTrap
 
 ## Usage
 
