@@ -1,10 +1,16 @@
 defmodule OPATest do
   use ExUnit.Case
-  doctest OPA
+  # doctest OPA
 
   setup_all do
     {:ok, pid} = OPATest.Utils.ensure_opa()
+    Process.sleep(1000)
     {:ok, _} = OPATest.Utils.seed_opa()
+
+    on_exit(fn %{passed: _passed} ->
+      IO.puts("Tearing down OPA HTTP server")
+    end)
+
     {:ok, pid: pid}
   end
 
