@@ -41,6 +41,7 @@ defmodule OPA.MixProject do
       {:req, "~> 0.5.0", optional: true},
 
       # dev/test/docs
+      {:muontrap, "~> 1.0", runtime: false},
       {:ex_doc, ">= 0.0.0", only: :docs}
     ]
   end

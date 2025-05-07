@@ -2,7 +2,7 @@ defmodule OPA.Server.HttpListener do
   use GenServer
   require Logger
 
-  def start_link(options) do
+  def start_link(options \\ []) do
     {opa_cli, options} = Keyword.pop(options, :opa_cli, System.find_executable("opa"))
     {addr, options} = Keyword.pop(options, :addr, "localhost:8181")
 
